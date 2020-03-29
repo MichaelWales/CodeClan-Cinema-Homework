@@ -36,16 +36,12 @@ class Customer
     return result
   end
 
-  def update_funds_by_id(id)
-    sql = "UPDATE customers SET funds = $1 WHERE id = $2"
-    values = [@funds, id]
-    SqlRunner.run(sql,values)
-  end
-
-  def update_name_by_id(id)
-    sql = "UPDATE customers SET name = $1 WHERE id = $2"
-    values = [@name, id]
-    SqlRunner.run(sql,values)
+  def update()
+    sql = "UPDATE customers SET
+    (name,funds) = ($1, $2)
+    WHERE id = $3"
+    values = [@name, @funds]
+    SqlRunner.run(sql, values)
   end
 
   def self.find_by_id(id)
@@ -54,6 +50,16 @@ class Customer
     customer_hash = SqlRunner.run(sql,values).first()
     return nil if customer_hash == nil
     return Customer.new(customer_hash)
+  end
+
+  def films()
+    sql = "SELECT films.*  FROM films
+    INNER JOIN tickets
+    ON films.id = tickets.film_id
+    WHERE tickets.customer_id = $1"
+    values = [@id]
+    films = SqlRunner.run(sql, values)
+    return films.map {|film_hash| Film.new(film_hash)}
   end
 
 end

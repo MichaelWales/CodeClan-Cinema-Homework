@@ -41,4 +41,18 @@ class Ticket
     return Ticket.new(ticket_hash)
   end
 
+  def customer()
+    sql = "SELECT * FROM customer WHERE id = $1"
+    values = [@customer_id]
+    customer_hash = SqlRunner.run(sql, values).first
+    return Customer.new(customer_hash)
+  end
+
+  def film()
+    sql = "SELECT * FROM film WHERE id = $1"
+    values = [@film_id]
+    film_hash = SqlRunner.run(sql, values).first
+    return Film.new(film_hash)
+  end
+
 end
