@@ -43,9 +43,5 @@ ticket3.save()
 ticket4 = Ticket.new({'customer_id' => customer4.id, 'film_id' => film2.id})
 ticket4.save()
 
-# film3.title = "The War of the Worlds"
-# film3.update_title_by_id("The War of the Worlds")
-
-
 binding.pry
 nil

@@ -30,7 +30,7 @@ class Customer
   end
 
   def self.all()
-    sql = "SELECT * FROM customers"
+    sql = "SELECT * FROM customers ORDER BY funds DESC"
     customers = SqlRunner.run(sql, [])
     result = customers.map { |customer| Customers.new( customer ) }
     return result
