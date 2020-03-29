@@ -11,8 +11,6 @@ class Customer
     @funds = options['funds']
   end
 
-  ## [SAVE], [UPDATE BY ID], [ALL], FIND BY ID, DELETE, [DELETE ALL]
-
   def save()
     sql = "INSERT INTO customers
     (name, funds)
