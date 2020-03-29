@@ -60,4 +60,11 @@ class Film
     return customers.map {|customer_hash| Customer.new(customer_hash)}
   end
 
+  def get_price()
+    sql = "SELECT price FROM films WHERE id = $1"
+    values = [@film_id]
+    film_hash = SqlRunner.run(sql, values).first
+    return Film.new(film_hash)
+  end
+
 end
